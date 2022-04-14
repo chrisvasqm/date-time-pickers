@@ -32,6 +32,10 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         picker.show(supportFragmentManager, this::class.java.simpleName)
+
+        picker.addOnPositiveButtonClickListener {
+            timePicker.setText("${picker.hour}:${picker.minute}")
+        }
     }
 
     private fun showDatePicker() {
