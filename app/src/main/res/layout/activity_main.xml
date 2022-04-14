@@ -37,7 +37,7 @@
         android:ems="10"
         android:focusable="false"
         android:gravity="center"
-        android:hint="HH/MM/YYYY"
+        android:hint="MM/DD/YYYY"
         android:inputType="none"
         app:layout_constraintEnd_toEndOf="@+id/timePicker"
         app:layout_constraintStart_toStartOf="@+id/timePicker"
