@@ -50,5 +50,9 @@ class MainActivity : AppCompatActivity() {
             .build()
 
         picker.show(supportFragmentManager, this::class.java.simpleName)
+
+        picker.addOnPositiveButtonClickListener {
+            datePicker.setText(picker.headerText)
+        }
     }
 }
