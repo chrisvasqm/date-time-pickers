@@ -7,6 +7,8 @@ import androidx.core.util.Pair
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.timepicker.MaterialTimePicker
 import com.google.android.material.timepicker.TimeFormat
+import java.text.SimpleDateFormat
+import java.util.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var timePicker: EditText
@@ -59,8 +61,21 @@ class MainActivity : AppCompatActivity() {
 
         picker.show(supportFragmentManager, this::class.java.simpleName)
 
-        picker.addOnPositiveButtonClickListener {
-            datePicker.setText(picker.headerText)
+        picker.addOnPositiveButtonClickListener { pair ->
+            datePicker.setText(getFormattedDateRange(pair))
         }
+    }
+
+    private fun getFormattedDateRange(
+        pair: Pair<Long, Long>
+    ): String {
+        val utc = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+        utc.timeInMillis = pair.first
+        val formatter = SimpleDateFormat("MM/dd/yyyy", Locale.US)
+        val formattedStart = formatter.format(utc.time)
+        utc.timeInMillis = pair.second
+        val formattedEnd = formatter.format(utc.time)
+
+        return "$formattedStart - $formattedEnd"
     }
 }
