@@ -15,7 +15,7 @@
         android:ems="10"
         android:focusable="false"
         android:gravity="center"
-        android:hint="00:00:00"
+        android:hint="00:00"
         android:inputType="none"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
