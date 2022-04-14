@@ -34,8 +34,16 @@ class MainActivity : AppCompatActivity() {
         picker.show(supportFragmentManager, this::class.java.simpleName)
 
         picker.addOnPositiveButtonClickListener {
-            timePicker.setText("${picker.hour}:${picker.minute}")
+            timePicker.setText(getFormattedTime(picker))
         }
+    }
+
+    private fun getFormattedTime(picker: MaterialTimePicker): String {
+        val hour = if (picker.hour > 12) picker.hour - 12 else picker.hour
+        val minute = if (picker.minute < 10) "0${picker.minute}" else picker.minute
+        val format = if (hour >= 12) "PM" else "AM"
+
+        return "${hour}:${minute} $format"
     }
 
     private fun showDatePicker() {
