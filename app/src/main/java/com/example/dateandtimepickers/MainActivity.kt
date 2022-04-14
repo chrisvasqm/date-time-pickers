@@ -66,15 +66,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun getFormattedDateRange(
-        pair: Pair<Long, Long>
-    ): String {
-        val utc = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
-        utc.timeInMillis = pair.first
-        val formatter = SimpleDateFormat("MM/dd/yyyy", Locale.US)
-        val formattedStart = formatter.format(utc.time)
-        utc.timeInMillis = pair.second
-        val formattedEnd = formatter.format(utc.time)
+    private fun getFormattedDateRange(pair: Pair<Long, Long>): String {
+        val formatter = SimpleDateFormat("MM/dd/yyyy", Locale.US).apply {
+            timeZone = TimeZone.getTimeZone("UTC")
+        }
+
+        val start = Date(pair.first)
+        val formattedStart = formatter.format(start)
+
+        val end = Date(pair.second)
+        val formattedEnd = formatter.format(end)
 
         return "$formattedStart - $formattedEnd"
     }
